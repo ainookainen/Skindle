@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- Dark theme -->
+    <style name="Theme.Skindle" parent="Theme.Material3.DayNight.NoActionBar">
+        <item name="colorPrimary">@color/oxford_blue</item>
+        <item name="colorOnPrimary">@color/white</item>
+        <item name="colorSecondary">@color/orange</item>
+        <item name="colorOnSecondary">@color/black</item>
+        <item name="android:colorBackground">@color/black</item>
+        <item name="colorOnBackground">@color/platinum</item>
+        <item name="colorSurface">@color/oxford_blue</item>
+        <item name="colorOnSurface">@color/platinum</item>
+        <item name="popupMenuBackground">@color/oxford_blue</item>
+        <item name="colorPrimaryContainer">@color/oxford_blue</item>
+    </style>
+</resources>

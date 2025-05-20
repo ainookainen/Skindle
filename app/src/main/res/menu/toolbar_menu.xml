@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <item
+        android:id="@+id/statistics"
+        android:icon="@drawable/statistics"
+        android:title="@string/statistics"
+        app:showAsAction="ifRoom" />
+    <item
+        android:id="@+id/language"
+        android:icon="@drawable/language"
+        android:title="@string/language"
+        app:showAsAction="always">
+        <menu>
+            <item
+                android:id="@+id/lang_en"
+                android:title="@string/english" />
+            <item
+                android:id="@+id/lang_fi"
+                android:title="@string/suomi" />
+        </menu>
+    </item>
+</menu>

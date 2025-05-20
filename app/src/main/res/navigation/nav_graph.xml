@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/nav_graph"
+    app:startDestination="@id/splashArtFragment">
+    <fragment
+        android:id="@+id/splashArtFragment"
+        android:name="com.example.skindle.ui.SplashArtFragment"
+        android:label="@string/app_name">
+        <action
+            android:id="@+id/action_splashArtFragment_to_statisticsFragment"
+            app:destination="@id/statisticsFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/statisticsFragment"
+        android:name="com.example.skindle.ui.StatisticsFragment"
+        android:label="@string/statistics" />
+
+</navigation>
