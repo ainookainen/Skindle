@@ -18,7 +18,7 @@ public class SplashArtRepository {
         this.context = context.getApplicationContext();
     }
 
-    public void getChampionsData(Callback callback) {
+    public void getChampionsData(IRepositoryCallback callback) {
         String url = "https://ddragon.leagueoflegends.com/cdn/15.10.1/data/en_US/champion.json";
         JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(Request.Method.GET, url, null, response -> {
             try {
@@ -31,10 +31,15 @@ public class SplashArtRepository {
                     String championName = champion.getString("name");
                     champions.add(new Champion(championID, championName));
                 }
+                callback.onSuccess(champions);
             } catch (JSONException e) {
                 e.printStackTrace();
+                callback.onError(e);
             }
-        }, error -> error.printStackTrace());
+        }, e -> {
+            e.printStackTrace();
+            callback.onError(e);
+        });
         VolleySingleton.getInstance(context).getRequestQueue().add(jsonObjectRequest);
     }
 }
