@@ -16,6 +16,9 @@ import androidx.navigation.ui.AppBarConfiguration;
 import androidx.navigation.ui.NavigationUI;
 
 import com.example.skindle.databinding.ActivityMainBinding;
+import com.example.skindle.util.LocaleHelper;
+
+import org.intellij.lang.annotations.Language;
 
 public class MainActivity extends AppCompatActivity {
     private NavController navController;
@@ -23,6 +26,7 @@ public class MainActivity extends AppCompatActivity {
     private ActivityMainBinding binding;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        LocaleHelper.onCreate(this);
         super.onCreate(savedInstanceState);
         EdgeToEdge.enable(this);
         binding = ActivityMainBinding.inflate(getLayoutInflater());
@@ -54,6 +58,16 @@ public class MainActivity extends AppCompatActivity {
         int id = item.getItemId();
         if (id == R.id.statistics) {
                 navController.navigate(R.id.action_splashArtFragment_to_statisticsFragment);
+            return true;
+        }
+        if (id==R.id.lang_en){
+            LocaleHelper.setLocale(this,"en");
+            recreate();
+            return true;
+        }
+        if (id==R.id.lang_fi){
+            LocaleHelper.setLocale(this,"fi");
+            recreate();
             return true;
         }
         return super.onOptionsItemSelected(item);

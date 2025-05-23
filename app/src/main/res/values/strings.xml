@@ -1,12 +1,11 @@
 <resources>
-    <string name="app_name">Skindle</string>
+    <string name="app_name" translatable="false">Skindle</string>
     <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
-    <string name="statistics">Statistics</string>
+    <string name="hello_blank_fragment" translatable="false">Hello blank fragment</string>
     <string name="language">Language</string>
-    <string name="english">English</string>
-    <string name="suomi">Suomi</string>
-    <string name="streak_info">Current Streak:</string>
+    <string name="english" translatable="false">English</string>
+    <string name="suomi" translatable="false">Suomi</string>
+    <string name="streak_info">Current streak:</string>
     <string name="games_won">Games won:</string>
     <string name="average_guesses">Average guesses:</string>
     <string name="one_shots">One shots:</string>
@@ -14,4 +13,5 @@
     <string name="type_champion_name">Type champion name...</string>
     <string name="splash_info_text">Which champion has the whole splash art?</string>
     <string name="guess">Guess!</string>
+    <string name="statistics">Statistics</string>
 </resources>

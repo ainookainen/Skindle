@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="language">Kieli</string>
+    <string name="streak_info">Tämänhetkinen striikki:</string>
+    <string name="games_won">Voitetut pelit:</string>
+    <string name="average_guesses">Arvausten keskiarvo:</string>
+    <string name="one_shots">Yhdellä läpi:</string>
+    <string name="max_streak">Maksimi striikki:</string>
+    <string name="type_champion_name">Kirjoita championin nimi...</string>
+    <string name="splash_info_text">Millä championilla on koko läiskähdyskuvimus?</string>
+    <string name="guess">Arvaa!</string>
+    <string name="statistics">Tilastot</string>
+</resources>
