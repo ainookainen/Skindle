@@ -18,8 +18,6 @@ import androidx.navigation.ui.NavigationUI;
 import com.example.skindle.databinding.ActivityMainBinding;
 import com.example.skindle.util.LocaleHelper;
 
-import org.intellij.lang.annotations.Language;
-
 public class MainActivity extends AppCompatActivity {
     private NavController navController;
     private AppBarConfiguration appBarConfiguration;
