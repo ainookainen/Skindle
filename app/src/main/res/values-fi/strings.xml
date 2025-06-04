@@ -11,4 +11,5 @@
     <string name="guess">Arvaa!</string>
     <string name="statistics">Tilastot</string>
     <string name="loading">Ladataan...</string>
+    <string name="something_went_wrong">Jotain meni pieleen.</string>
 </resources>

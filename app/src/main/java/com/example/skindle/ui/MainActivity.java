@@ -1,4 +1,4 @@
-package com.example.skindle;
+package com.example.skindle.ui;
 
 import android.os.Bundle;
 import android.view.Menu;
@@ -15,6 +15,7 @@ import androidx.navigation.fragment.NavHostFragment;
 import androidx.navigation.ui.AppBarConfiguration;
 import androidx.navigation.ui.NavigationUI;
 
+import com.example.skindle.R;
 import com.example.skindle.databinding.ActivityMainBinding;
 import com.example.skindle.util.LocaleHelper;
 
