@@ -1,11 +1,19 @@
 package com.example.skindle.data;
 
 import android.content.Context;
+import android.graphics.Bitmap;
+import android.widget.ImageView;
+import android.widget.TextView;
 
 import com.android.volley.Request;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.ImageRequest;
 import com.android.volley.toolbox.JsonObjectRequest;
+import com.example.skindle.R;
 import com.example.skindle.model.Champion;
 import com.example.skindle.model.SplashArt;
+import com.example.skindle.util.SplashArtCropper;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -68,5 +76,25 @@ public class SplashArtRepository {
             callback.onError(e);
         });
         VolleySingleton.getInstance(context).getRequestQueue().add(jsonObjectRequest);
+    }
+
+    /* The code is from the accepted answer (by TWL) https://stackoverflow.com/questions/41104831/how-to-download-an-image-by-using-volley */
+    public void setSplash(SplashArt splashArt, ImageView imageView, Context context, float zoom, TextView textView) {
+        String url = splashArt.getImageUrl();
+        ImageRequest request = new ImageRequest(url, new Response.Listener<Bitmap>() {
+            @Override
+            public void onResponse(Bitmap bitmap) {
+                imageView.post(() -> {
+                    int viewSize = imageView.getHeight();
+                    Bitmap cropped = SplashArtCropper.cropSplash(bitmap, viewSize, zoom);
+                    imageView.setImageBitmap(cropped);
+                });
+            }
+        }, 0, 0, imageView.getScaleType(), null, new Response.ErrorListener() {
+            public void onErrorResponse(VolleyError error) {
+                textView.setText(R.string.something_went_wrong);
+            }
+        });
+        VolleySingleton.getInstance(context).getRequestQueue().add(request);
     }
 }

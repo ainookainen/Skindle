@@ -73,43 +73,4 @@ public class SplashArtService {
             }
         });
     }
-
-    /* The code is from the accepted answer (by TWL) https://stackoverflow.com/questions/41104831/how-to-download-an-image-by-using-volley */
-    public void setSplash(SplashArt splashArt, ImageView imageView, Context context, float zoom, TextView textView) {
-        String url = splashArt.getImageUrl();
-        ImageRequest request = new ImageRequest(url, new Response.Listener<Bitmap>() {
-            @Override
-            public void onResponse(Bitmap bitmap) {
-                imageView.post(() -> {
-                    int viewSize = imageView.getHeight();
-                    Bitmap cropped = cropSplash(bitmap, viewSize, zoom);
-                    imageView.setImageBitmap(cropped);
-                });
-            }
-        }, 0, 0, imageView.getScaleType(), null, new Response.ErrorListener() {
-            public void onErrorResponse(VolleyError error) {
-                textView.setText(R.string.something_went_wrong);
-            }
-        });
-        VolleySingleton.getInstance(context).getRequestQueue().add(request);
-    }
-
-    public Bitmap cropSplash(Bitmap bitmap, int viewSize, float zoom) {
-        int maxWidth = bitmap.getWidth();
-        int maxHeight = bitmap.getHeight();
-        int cropSize = (int) (zoom * viewSize);
-        cropSize = Math.min(cropSize, Math.min(maxWidth, maxHeight));
-        if (zoom == 0.25f) {
-            int xBound = Math.max(maxWidth - cropSize, 0);
-            int yBound = Math.max(maxHeight - cropSize, 0);
-            cx = new Random().nextInt(xBound + 1) + cropSize / 2;
-            cy = new Random().nextInt(yBound + 1) + cropSize / 2;
-        }
-        int x = cx - cropSize / 2;
-        int y = cy - cropSize / 2;
-        x = Math.max(0, Math.min(x, maxWidth - cropSize));
-        y = Math.max(0, Math.min(y, maxHeight - cropSize));
-        Bitmap cropped = Bitmap.createBitmap(bitmap, x, y, cropSize, cropSize);
-        return Bitmap.createScaledBitmap(cropped, viewSize, viewSize, true);
-    }
 }

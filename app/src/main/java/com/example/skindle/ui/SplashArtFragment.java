@@ -10,6 +10,7 @@ import androidx.fragment.app.Fragment;
 
 import com.example.skindle.R;
 import com.example.skindle.data.IServiceCallback;
+import com.example.skindle.data.SplashArtRepository;
 import com.example.skindle.databinding.FragmentSplashArtBinding;
 import com.example.skindle.model.SplashArt;
 import com.example.skindle.service.GameService;
@@ -22,6 +23,7 @@ public class SplashArtFragment extends Fragment {
     private FragmentSplashArtBinding binding;
     private SplashArtService splashArtService;
     private GameService gameService;
+    private SplashArtRepository splashArtRepository;
 
     public SplashArtFragment() {
         // Required empty public constructor
@@ -37,6 +39,7 @@ public class SplashArtFragment extends Fragment {
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         splashArtService = new SplashArtService(getContext());
+        splashArtRepository = new SplashArtRepository(getContext());
         gameService = new GameService(splashArtService);
         loadNewSplash();
         binding.GuessButton.setOnClickListener(v -> {
@@ -48,7 +51,7 @@ public class SplashArtFragment extends Fragment {
                 binding.GuessText.setText("");
             } else {
                 SplashArt splashArt = gameService.getSplashArt();
-                splashArtService.setSplash(splashArt, binding.SplashImage, requireContext(), gameService.getZoom(), binding.LoadingText);
+                splashArtRepository.setSplash(splashArt, binding.SplashImage, requireContext(), gameService.getZoom(), binding.LoadingText);
                 Snackbar.make(v, "Try again", Snackbar.LENGTH_SHORT).show();
             }
         });
@@ -63,7 +66,7 @@ public class SplashArtFragment extends Fragment {
             @Override
             public <T> void onSuccess(T data) {
                 SplashArt splashArt = gameService.getSplashArt();
-                splashArtService.setSplash(splashArt, binding.SplashImage, requireContext(), gameService.getZoom(), binding.LoadingText);
+                splashArtRepository.setSplash(splashArt, binding.SplashImage, requireContext(), gameService.getZoom(), binding.LoadingText);
             }
 
             @Override
