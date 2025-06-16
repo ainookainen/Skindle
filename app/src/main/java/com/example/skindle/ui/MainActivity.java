@@ -23,6 +23,7 @@ public class MainActivity extends AppCompatActivity {
     private NavController navController;
     private AppBarConfiguration appBarConfiguration;
     private ActivityMainBinding binding;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         LocaleHelper.onCreate(this);
@@ -44,34 +45,41 @@ public class MainActivity extends AppCompatActivity {
         appBarConfiguration = new AppBarConfiguration.Builder(R.id.splashArtFragment).build();
         NavigationUI.setupActionBarWithNavController(this, navController, appBarConfiguration);
     }
+
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.toolbar_menu, menu);
         return true;
     }
+
     @Override
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
         if (NavigationUI.onNavDestinationSelected(item, navController)) {
             return true;
         }
         int id = item.getItemId();
-        if (id == R.id.statistics) {
-                navController.navigate(R.id.action_splashArtFragment_to_statisticsFragment);
-            return true;
-        }
-        if (id==R.id.lang_en){
-            LocaleHelper.setLocale(this,"en");
+
+        /* if (id == R.id.statistics) {
+         * navController.navigate(R.id.action_splashArtFragment_to_statisticsFragment);
+         * return true;}
+         * */
+
+        if (id == R.id.lang_en) {
+            LocaleHelper.setLocale(this, "en");
             recreate();
             return true;
         }
-        if (id==R.id.lang_fi){
-            LocaleHelper.setLocale(this,"fi");
+        if (id == R.id.lang_fi) {
+            LocaleHelper.setLocale(this, "fi");
             recreate();
             return true;
         }
-        return super.onOptionsItemSelected(item);
+        return super.
+
+                onOptionsItemSelected(item);
     }
-    public boolean onSupportNavigateUp() {
-        return NavigationUI.navigateUp(navController, appBarConfiguration) || super.onSupportNavigateUp();
-    }
+
+    /* public boolean onSupportNavigateUp() {
+     * return NavigationUI.navigateUp(navController, appBarConfiguration) || super.onSupportNavigateUp();
+     } */
 }

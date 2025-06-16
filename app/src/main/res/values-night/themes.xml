@@ -12,5 +12,7 @@
         <item name="colorOnSurface">@color/platinum</item>
         <item name="popupMenuBackground">@color/oxford_blue</item>
         <item name="colorPrimaryContainer">@color/oxford_blue</item>
+        <item name="colorTertiary">@color/engineering_orange</item>
+        <item name="colorOnTertiary">@color/white</item>
     </style>
 </resources>

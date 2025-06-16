@@ -97,4 +97,22 @@ public class SplashArtRepository {
         });
         VolleySingleton.getInstance(context).getRequestQueue().add(request);
     }
+
+    public void setIcon(Champion champion, ImageView view, Context context) {
+        String url = champion.getIconUrl();
+        ImageRequest imageRequest = new ImageRequest(url, new Response.Listener<Bitmap>() {
+            @Override
+            public void onResponse(Bitmap response) {
+                view.post(() -> {
+                    view.setImageBitmap(response);
+                });
+            }
+        }, 0, 0, view.getScaleType(), null, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                view.setVisibility(view.GONE);
+            }
+        });
+        VolleySingleton.getInstance(context).getRequestQueue().add(imageRequest);
+    }
 }
