@@ -6,7 +6,6 @@ import com.example.skindle.data.SpellRepository;
 import com.example.skindle.data.SplashArtRepository;
 import com.example.skindle.model.Ability;
 import com.example.skindle.model.Champion;
-import com.example.skindle.model.SplashArt;
 
 import java.util.ArrayList;
 import java.util.Locale;
