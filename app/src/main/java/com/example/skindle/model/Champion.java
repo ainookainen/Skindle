@@ -1,7 +1,5 @@
 package com.example.skindle.model;
 
-import java.util.Locale;
-
 public class Champion {
     private String id;
     /**

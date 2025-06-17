@@ -1,5 +1,6 @@
 package com.example.skindle.ui;
 
+import android.content.pm.ActivityInfo;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -19,6 +20,8 @@ import com.example.skindle.R;
 import com.example.skindle.databinding.ActivityMainBinding;
 import com.example.skindle.util.LocaleHelper;
 
+import java.util.Objects;
+
 public class MainActivity extends AppCompatActivity {
     private NavController navController;
     private AppBarConfiguration appBarConfiguration;
@@ -31,6 +34,7 @@ public class MainActivity extends AppCompatActivity {
         EdgeToEdge.enable(this);
         binding = ActivityMainBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
+        this.setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
         ViewCompat.setOnApplyWindowInsetsListener(binding.main, (v, insets) -> {
             Insets systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars());
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
@@ -64,6 +68,13 @@ public class MainActivity extends AppCompatActivity {
          * return true;}
          * */
 
+        if (Objects.requireNonNull(navController.getCurrentDestination()).getId() == R.id.splashArtFragment) {
+            if (id == R.id.spelldle) {
+                navController.navigate(R.id.action_splashArtFragment_to_spelldleFragment);
+                return true;
+            }
+        }
+
         if (id == R.id.lang_en) {
             LocaleHelper.setLocale(this, "en");
             recreate();
@@ -79,7 +90,7 @@ public class MainActivity extends AppCompatActivity {
                 onOptionsItemSelected(item);
     }
 
-    /* public boolean onSupportNavigateUp() {
-     * return NavigationUI.navigateUp(navController, appBarConfiguration) || super.onSupportNavigateUp();
-     } */
+    public boolean onSupportNavigateUp() {
+        return NavigationUI.navigateUp(navController, appBarConfiguration) || super.onSupportNavigateUp();
+    }
 }

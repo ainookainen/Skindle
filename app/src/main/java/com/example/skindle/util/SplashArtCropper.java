@@ -2,8 +2,6 @@ package com.example.skindle.util;
 
 import android.graphics.Bitmap;
 
-import androidx.annotation.NonNull;
-
 import java.util.Random;
 
 public class SplashArtCropper {

@@ -29,7 +29,7 @@ public class SplashArtRepository {
     }
 
     public void getChampionsData(IRepositoryCallback callback) {
-        String url = "https://ddragon.leagueoflegends.com/cdn/15.10.1/data/en_US/champion.json";
+        String url = "https://ddragon.leagueoflegends.com/cdn/15.12.1/data/en_US/champion.json";
         JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(Request.Method.GET, url, null, response -> {
             try {
                 JSONObject championsData = response.getJSONObject("data");

@@ -7,6 +7,11 @@
        android:title="@string/statistics"
        app:showAsAction="ifRoom" /> -->
     <item
+        android:id="@+id/spelldle"
+        android:icon="@drawable/spelldle"
+        android:title="@string/spelldle"
+        app:showAsAction="always"/>
+    <item
         android:id="@+id/language"
         android:icon="@drawable/language"
         android:title="@string/language"

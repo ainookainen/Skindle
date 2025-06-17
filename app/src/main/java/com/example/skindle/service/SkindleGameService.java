@@ -9,7 +9,7 @@ import com.example.skindle.model.SplashArt;
 import java.util.ArrayList;
 import java.util.Locale;
 
-public class GameService {
+public class SkindleGameService {
     private SplashArt splashArt;
     private float zoom;
     private final float zoomIncrease = 0.05f;
@@ -19,7 +19,7 @@ public class GameService {
     private ArrayList<Champion> wrongGuesses = new ArrayList<>();
     private ArrayList<String> guessableChampions = new ArrayList<>();
 
-    public GameService(SplashArtService splashArtService, SplashArtRepository splashArtRepository) {
+    public SkindleGameService(SplashArtService splashArtService, SplashArtRepository splashArtRepository) {
         this.splashArtService = splashArtService;
         this.splashArtRepository = splashArtRepository;
         this.zoom = 0.25f;

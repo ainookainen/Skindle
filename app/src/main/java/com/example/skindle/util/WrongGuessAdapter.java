@@ -13,7 +13,6 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.example.skindle.R;
 import com.example.skindle.data.SplashArtRepository;
 import com.example.skindle.model.Champion;
-import com.example.skindle.service.SplashArtService;
 
 import java.util.List;
 import java.util.Locale;
