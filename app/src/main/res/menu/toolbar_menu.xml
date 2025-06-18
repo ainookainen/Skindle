@@ -8,7 +8,7 @@
        app:showAsAction="ifRoom" /> -->
     <item
         android:id="@+id/spelldle"
-        android:icon="@drawable/spelldle"
+        android:icon="@drawable/sparkle"
         android:title="@string/spelldle"
         app:showAsAction="always"/>
     <item
