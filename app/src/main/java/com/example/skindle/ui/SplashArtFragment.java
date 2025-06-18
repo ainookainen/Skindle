@@ -33,6 +33,7 @@ public class SplashArtFragment extends Fragment {
     private SplashArtService splashArtService;
     private SkindleGameService skindleGameService;
     private SplashArtRepository splashArtRepository;
+    private ArrayAdapter<String> autoCompleteTextViewAdapter;
     private WrongGuessAdapter adapter;
     private RecyclerView recyclerView;
     private List<Champion> wrongGuesses;
@@ -59,11 +60,10 @@ public class SplashArtFragment extends Fragment {
         splashArtRepository = new SplashArtRepository(getContext());
         skindleGameService = new SkindleGameService(splashArtService, splashArtRepository);
         loadNewSplash();
-        ArrayAdapter<String> autoCompleteTextViewAdapter = new ArrayAdapter<>(requireContext(), android.R.layout.simple_dropdown_item_1line, skindleGameService.getGuessableChampions());
-        binding.GuessText.setAdapter(autoCompleteTextViewAdapter);
+        autoCompleteTextViewAdapter = new ArrayAdapter<>(requireContext(), android.R.layout.simple_dropdown_item_1line, skindleGameService.getGuessableChampions());
         binding.GuessButton.setOnClickListener(v -> {
             String guess = binding.GuessText.getText().toString().strip();
-            checkGuess(guess, autoCompleteTextViewAdapter, view);
+            checkGuess(guess, view);
         });
     }
 
@@ -80,6 +80,7 @@ public class SplashArtFragment extends Fragment {
                     SplashArt solution = skindleGameService.getSplashArt();
                     binding.GuessText.setText(solution.getChampionName().toUpperCase(Locale.ENGLISH));
                 });
+                binding.GuessText.setAdapter(autoCompleteTextViewAdapter);
             }
 
             @Override
@@ -100,7 +101,7 @@ public class SplashArtFragment extends Fragment {
         });
     }
 
-    private void checkGuess(String guess, ArrayAdapter<String> autoCompleteTextViewAdapter, View v) {
+    private void checkGuess(String guess, View v) {
         if (skindleGameService.isValidChampion(guess)) {
             boolean correct = skindleGameService.guess(guess);
             if (correct) {
@@ -109,7 +110,7 @@ public class SplashArtFragment extends Fragment {
                 wrongGuesses.clear();
                 wrongGuesses.addAll(skindleGameService.getWrongGuesses());
                 adapter.notifyDataSetChanged();
-                updateAutoCompleteTextView(autoCompleteTextViewAdapter);
+                updateAutoCompleteTextView();
             } else {
                 Snackbar.make(v, "Try again", Snackbar.LENGTH_SHORT).show();
                 SplashArt splashArt = skindleGameService.getSplashArt();
@@ -117,14 +118,14 @@ public class SplashArtFragment extends Fragment {
                 wrongGuesses.add(0, skindleGameService.getWrongGuesses().get(0)); // new item was inserted to idx 0 of wrongGuesses in Gameservice
                 adapter.notifyItemInserted(0);
                 recyclerView.scrollToPosition(0);
-                updateAutoCompleteTextView(autoCompleteTextViewAdapter);
+                updateAutoCompleteTextView();
             }
         } else {
             Snackbar.make(v, "Not a valid champion.", Snackbar.LENGTH_SHORT).show();
         }
     }
 
-    private void updateAutoCompleteTextView(ArrayAdapter<String> autoCompleteTextViewAdapter) {
+    private void updateAutoCompleteTextView() {
         binding.GuessText.setText("");
         autoCompleteTextViewAdapter.clear();
         autoCompleteTextViewAdapter.addAll(skindleGameService.getGuessableChampions());

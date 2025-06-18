@@ -39,6 +39,7 @@ public class SpelldleFragment extends Fragment {
     private SpelldleGameService spelldleGameService;
     private SplashArtRepository splashArtRepository;
     private SpellRepository spellRepository;
+    private ArrayAdapter<String> autoCompleteTextViewAdapter;
     private WrongGuessAdapter adapter;
     private RecyclerView recyclerView;
     private List<Champion> wrongGuesses;
@@ -65,16 +66,15 @@ public class SpelldleFragment extends Fragment {
         splashArtRepository = new SplashArtRepository(getContext());
         spellRepository = new SpellRepository(getContext());
         spelldleGameService = new SpelldleGameService(splashArtRepository, spellRepository, abilityService);
-        loadNewSplash();
-        ArrayAdapter<String> autoCompleteTextViewAdapter = new ArrayAdapter<>(requireContext(), android.R.layout.simple_dropdown_item_1line, spelldleGameService.getGuessableChampions());
-        binding.GuessText.setAdapter(autoCompleteTextViewAdapter);
+        loadNewImage();
+        autoCompleteTextViewAdapter = new ArrayAdapter<>(requireContext(), android.R.layout.simple_dropdown_item_1line, spelldleGameService.getGuessableChampions());
         binding.GuessButton.setOnClickListener(v -> {
             String guess = binding.GuessText.getText().toString().strip();
-            checkGuess(guess, autoCompleteTextViewAdapter, view);
+            checkGuess(guess, view);
         });
     }
 
-    private void loadNewSplash() {
+    private void loadNewImage() {
         spelldleGameService.newAbility(new IServiceCallback() {
             @Override
             public <T> void onSuccess(T data) {
@@ -88,6 +88,7 @@ public class SpelldleFragment extends Fragment {
                     Ability solution = spelldleGameService.getAbility();
                     binding.GuessText.setText(solution.getChampionName().toUpperCase(Locale.ENGLISH));
                 });
+                binding.GuessText.setAdapter(autoCompleteTextViewAdapter);
             }
 
             @Override
@@ -108,29 +109,29 @@ public class SpelldleFragment extends Fragment {
         });
     }
 
-    private void checkGuess(String guess, ArrayAdapter<String> autoCompleteTextViewAdapter, View v) {
+    private void checkGuess(String guess, View v) {
         if (spelldleGameService.isValidChampion(guess)) {
             boolean correct = spelldleGameService.guess(guess);
             if (correct) {
                 Snackbar.make(v, "Correct!", Snackbar.LENGTH_SHORT).show();
-                loadNewSplash();
+                loadNewImage();
                 wrongGuesses.clear();
                 wrongGuesses.addAll(spelldleGameService.getWrongGuesses());
                 adapter.notifyDataSetChanged();
-                updateAutoCompleteTextView(autoCompleteTextViewAdapter);
+                updateAutoCompleteTextView();
             } else {
                 Snackbar.make(v, "Try again", Snackbar.LENGTH_SHORT).show();
                 wrongGuesses.add(0, spelldleGameService.getWrongGuesses().get(0)); // new item was inserted to idx 0 of wrongGuesses in Gameservice
                 adapter.notifyItemInserted(0);
                 recyclerView.scrollToPosition(0);
-                updateAutoCompleteTextView(autoCompleteTextViewAdapter);
+                updateAutoCompleteTextView();
             }
         } else {
             Snackbar.make(v, "Not a valid champion.", Snackbar.LENGTH_SHORT).show();
         }
     }
 
-    private void updateAutoCompleteTextView(ArrayAdapter<String> autoCompleteTextViewAdapter) {
+    private void updateAutoCompleteTextView() {
         binding.GuessText.setText("");
         autoCompleteTextViewAdapter.clear();
         autoCompleteTextViewAdapter.addAll(spelldleGameService.getGuessableChampions());

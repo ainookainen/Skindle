@@ -14,5 +14,6 @@
         <item name="colorPrimaryContainer">@color/oxford_blue</item>
         <item name="colorTertiary">@color/engineering_orange</item>
         <item name="colorOnTertiary">@color/white</item>
+        <item name="colorPrimaryVariant">@color/delft_blue</item>
     </style>
 </resources>

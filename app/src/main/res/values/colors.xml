@@ -2,6 +2,7 @@
 <resources>
     <color name="black">#FF000000</color>
     <color name="oxford_blue">#FF14213D</color>
+    <color name="delft_blue">#1E305C</color>
     <color name="orange">#FFFCA311</color>
     <color name="platinum">#FFE5E5E5</color>
     <color name="white">#FFFFFFFF</color>
